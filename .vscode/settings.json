@@ -1,6 +1,9 @@
 {
   "files.exclude": {
     "node_modules/": true,
-    "_output/": false
-  }
+    "_output/": true,
+    "build": true
+  },
+  "css.validate": false,
+  "tailwindCSS.validate": true
 }

@@ -6,6 +6,7 @@ module.exports = function (eleventyConfig) {
     "md",
   ]);
   eleventyConfig.addPassthroughCopy("site/static");
+  eleventyConfig.setQuietMode(true);
 
   return {
     dir: {
