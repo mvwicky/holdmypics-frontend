@@ -12,7 +12,9 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
     "@snowpack/plugin-run-script": "^2.0.3",
+    "@types/canvas-confetti": "^1.0.0",
     "prettier": "^2.0.5",
-    "snowpack": "^2.7.6"
+    "snowpack": "^2.7.6",
+    "typescript": "^3.9.7"
   }
 }
