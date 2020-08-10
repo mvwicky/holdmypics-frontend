@@ -1,25 +1,22 @@
 module.exports = function (eleventyConfig) {
   eleventyConfig.setTemplateFormats([
     // Templates:
-    'html',
-    'njk',
-    'md',
-    // Static Assets:
-    'css',
-    'jpeg',
-    'jpg',
-    'png',
-    'svg',
-    'woff',
-    'woff2',
+    "html",
+    "njk",
+    "md",
   ]);
-  eleventyConfig.addPassthroughCopy('static');
+  eleventyConfig.addPassthroughCopy("site/static");
 
   return {
     dir: {
-      input: '_template',
-      includes: '../_includes',
-      output: '_output',
+      input: "site",
+      includes: "_includes",
+      output: "_output",
+      data: "_data",
     },
+    dataTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
+    markdownTemplateEngine: "njk",
+    passthroughFileCopy: true,
   };
 };
