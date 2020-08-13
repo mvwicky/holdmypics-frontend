@@ -1,0 +1,12 @@
+{
+  "name": "e2e",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Michael Van Wickle <me@michaelvanwickle.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "cypress": "^4.12.1",
+    "typescript": "^3.9.7"
+  }
+}
