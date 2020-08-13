@@ -9,6 +9,7 @@
     justify-content: center;
     padding-left: 1rem;
     padding-right: 1rem;
+    margin-bottom: 1rem;
   }
 </style>
 
