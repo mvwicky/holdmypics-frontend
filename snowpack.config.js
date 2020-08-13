@@ -1,13 +1,21 @@
 module.exports = {
+  extends: "@snowpack/app-scripts-svelte",
   mount: {
-    _output: "/",
+    public: "/",
     src: "/_dist_",
   },
   plugins: [
     ["@snowpack/plugin-postcss", {}],
-    ["@snowpack/plugin-run-script", { cmd: "eleventy", watch: "$1 --watch" }],
-    ["@snowpack/plugin-webpack", {}],
+    [
+      "@snowpack/plugin-run-script",
+      { cmd: "tsc --noEmit", watch: "$1 --watch" },
+    ],
+    ["@snowpack/plugin-run-script", { cmd: "svelte-check" }],
+    "@snowpack/plugin-webpack",
   ],
   open: "none",
   clean: true,
+  installOptions: {
+    installTypes: true,
+  },
 };
