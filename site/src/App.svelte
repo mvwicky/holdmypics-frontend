@@ -1,22 +1,22 @@
 <script lang="ts">
+  import { onDestroy } from "svelte";
+
   import Row from "./components/Row.svelte";
   import ImageForm from "./components/ImageForm.svelte";
-  export let appTitle: string = "Hold My Pics";
-  export let imageCount: number = 0;
+  import { title, count } from "./helpers/stores";
 
-  let imgCountStr = imageCount.toLocaleString(undefined, {
-    style: "decimal",
-    maximumFractionDigits: 0,
+  let imgCountStr: string = "0";
+  const unsubscribe = count.subscribe((val) => {
+    console.log(val);
+    imgCountStr = val.toLocaleString(undefined, {
+      style: "decimal",
+      maximumFractionDigits: 0,
+    });
   });
+  onDestroy(unsubscribe);
 </script>
 
 <style>
-  /* :global(body) {
-    font-family: "Fira Sans";
-  } */
-  /* :global(header, footer, h1, h2, h3, h4, h5, h6) {
-    font-family: "Spectral";
-  } */
   .App {
     @apply w-full;
     @apply min-h-screen;
@@ -28,13 +28,14 @@
     @apply max-w-2xl;
     @apply mx-auto;
     @apply h-full;
+    @apply py-6;
   }
 </style>
 
 <div class="App">
   <div class="AppInner">
     <Row>
-      <h1>{appTitle}</h1>
+      <h1>{$title}</h1>
     </Row>
     <Row>
       <p>

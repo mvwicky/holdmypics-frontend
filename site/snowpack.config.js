@@ -11,10 +11,10 @@ module.exports = {
       { cmd: "tsc --noEmit", watch: "$1 --watch" },
     ],
     ["@snowpack/plugin-run-script", { cmd: "svelte-check" }],
-    "@snowpack/plugin-webpack",
+    // "@snowpack/plugin-webpack",
   ],
-  open: "none",
-  clean: true,
+  buildOptions: { clean: true },
+  devOptions: { open: "none", secure: false },
   installOptions: {
     installTypes: true,
   },

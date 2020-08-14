@@ -3,12 +3,16 @@
 
   let width: number = 638;
   let height: number = 388;
+  let fg: string = "555";
+  let bg: string = "cef";
+  let fmt: string = "png";
+
+  let colorPattern = "(([a-fA-F0-9]{3})|([a-fA-F0-9]{6}))|rand";
 </script>
 
 <style>
   .ImageForm {
-    @apply w-full;
-    @apply px-2;
+    @apply w-full px-2;
   }
   .form-group {
     @apply pb-4;
@@ -19,15 +23,25 @@
     @apply justify-between;
     @apply content-start;
   }
-  input {
+  .form-group > * {
+    flex: 0 0 50%;
+  }
+  input,
+  select {
+    @apply block w-full;
     @apply shadow;
-    @apply border;
-    @apply rounded;
-    @apply py-1;
-    @apply px-2;
+    @apply border-2 border-gray-200 rounded;
+    @apply py-1 px-2;
     @apply appearance-none;
     @apply text-gray-700;
     @apply leading-tight;
+  }
+  input:focus,
+  select:focus {
+    @apply outline-none bg-white border-indigo-500;
+  }
+  input:invalid {
+    @apply border-red-500;
   }
 </style>
 
@@ -38,24 +52,88 @@
 </Row>
 
 <Row>
-  <code>/api/{width}x{height}/</code>
+  <code>/api/{width}x{height}/{bg}/{fg}/{fmt}/</code>
 </Row>
 
 <form class="ImageForm">
   <div class="form-group">
     <label for="width">Width</label>
-    <input type="number" id="width" name="width" bind:value={width} />
+    <input
+      type="number"
+      id="width"
+      name="width"
+      step="1"
+      min="1"
+      bind:value={width} />
   </div>
   <div class="form-group">
     <label for="height">Height</label>
-    <input type="number" id="height" name="height" bind:value={height} />
+    <input
+      type="number"
+      id="height"
+      name="height"
+      step="1"
+      min="1"
+      bind:value={height} />
   </div>
   <div class="form-group">
     <label for="fg">Foreground Color</label>
-    <input type="text" id="fg" name="fg" />
+    <input
+      type="text"
+      id="fg"
+      name="fg"
+      bind:value={fg}
+      pattern={colorPattern}
+      spellcheck={false} />
   </div>
   <div class="form-group">
     <label for="bg">Background Color</label>
-    <input type="text" id="bg" name="bg" />
+    <input
+      type="text"
+      id="bg"
+      name="bg"
+      bind:value={bg}
+      pattern={colorPattern}
+      spellcheck={false} />
+  </div>
+  <div class="form-group">
+    <label for="fmt">Format</label>
+    <div class="input-group relative">
+      <select name="fmt" id="fmt" bind:value={fmt}>
+        <option selected value="png">PNG</option>
+      </select>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 flex items-center
+        px-2 text-gray-700">
+        <svg
+          class="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20">
+          <path
+            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586
+            4.343 8z" />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="font">Font</label>
+    <div class="input-group relative">
+      <select name="font" id="font">
+        <option selected value="overpass">Overpass</option>
+      </select>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 flex items-center
+        px-2 text-gray-700">
+        <svg
+          class="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20">
+          <path
+            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586
+            4.343 8z" />
+        </svg>
+      </div>
+    </div>
   </div>
 </form>

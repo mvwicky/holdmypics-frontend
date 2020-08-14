@@ -1,10 +1,14 @@
 {
-  "name": "e2e",
+  "name": "holdmytests-e2e",
   "version": "0.0.1",
-  "main": "index.js",
-  "author": "Michael Van Wickle <me@michaelvanwickle.com>",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "author": "Michael Van Wickle <me@michaelvanwickle.com>",
+  "main": "index.js",
+  "scripts": {
+    "open": "cypress open",
+    "run": "cypress run"
+  },
   "dependencies": {
     "cypress": "^4.12.1",
     "typescript": "^3.9.7"
