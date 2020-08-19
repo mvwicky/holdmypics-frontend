@@ -7,10 +7,14 @@
   "main": "index.js",
   "scripts": {
     "open": "cypress open",
-    "run": "cypress run"
+    "run": "cypress run",
+    "start-server": "sirv ../site/build -p 8081",
+    "test": "cypress run"
   },
   "dependencies": {
     "cypress": "^4.12.1",
+    "sirv-cli": "^1.0.6",
+    "start-server-and-test": "^1.11.3",
     "typescript": "^3.9.7"
   }
 }
