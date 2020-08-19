@@ -1,34 +1,43 @@
 <script lang="ts">
-  import { onDestroy } from "svelte";
+  import { onDestroy, onMount } from "svelte";
 
   import Row from "./components/Row.svelte";
   import ImageForm from "./components/ImageForm.svelte";
+  import Routes from "./components/Routes.svelte";
+
+  import { fetchCount } from "./helpers/fetch-count";
   import { title, count } from "./helpers/stores";
 
-  let imgCountStr: string = "0";
-  const unsubscribe = count.subscribe((val) => {
-    console.log(val);
-    imgCountStr = val.toLocaleString(undefined, {
-      style: "decimal",
-      maximumFractionDigits: 0,
+  onMount(() => {
+    fetchCount().then((c) => {
+      if (c !== null) {
+        count.set(c);
+      }
     });
+  });
+
+  let imgCountStr: string = "";
+  const unsubscribe = count.subscribe((val) => {
+    if (val !== undefined) {
+      imgCountStr = val.toLocaleString(undefined, {
+        style: "decimal",
+        maximumFractionDigits: 0,
+      });
+    } else {
+      imgCountStr = "";
+    }
   });
   onDestroy(unsubscribe);
 </script>
 
 <style>
   .App {
-    @apply w-full;
-    @apply min-h-screen;
+    @apply w-full min-h-screen;
   }
   .AppInner {
-    @apply border-r;
-    @apply border-l;
-    @apply border-gray-500;
-    @apply max-w-2xl;
-    @apply mx-auto;
-    @apply h-full;
-    @apply py-6;
+    @apply border-l border-r border-gray-500;
+    @apply max-w-2xl h-full;
+    @apply mx-auto py-6;
   }
 </style>
 
@@ -44,10 +53,13 @@
       </p>
     </Row>
     <Row>
-      <h2>~{imgCountStr} Images Generated</h2>
+      <h2>
+        {#if imgCountStr.length === 0}
+          &hellip;
+        {:else}~{imgCountStr} Images Generated{/if}
+      </h2>
     </Row>
-
     <ImageForm />
+    <Routes />
   </div>
-
 </div>

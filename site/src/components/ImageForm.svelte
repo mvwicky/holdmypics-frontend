@@ -1,47 +1,104 @@
 <script lang="ts">
+  import type { Option } from "../typing";
+  import { onlyTruthy } from "../helpers";
+
   import Row from "./Row.svelte";
+  import HelpText from "./HelpText.svelte";
+  import CustomSelect from "./CustomSelect.svelte";
 
   let width: number = 638;
   let height: number = 388;
   let fg: string = "555";
   let bg: string = "cef";
   let fmt: string = "png";
+  let font: string = "overpass";
+  let text: string = "";
+  let randomText: boolean = false;
 
-  let colorPattern = "(([a-fA-F0-9]{3})|([a-fA-F0-9]{6}))|rand";
+  let textInput: HTMLInputElement | undefined;
+
+  function randomChanged() {
+    if (textInput) {
+      textInput.disabled = randomText;
+    }
+  }
+
+  let textParam: string | undefined;
+  $: textParam = textInput?.disabled
+    ? undefined
+    : text.length > 0
+    ? text
+    : undefined;
+
+  let params: string;
+  $: params = new URLSearchParams(
+    onlyTruthy([
+      ["font", font],
+      ["text", textParam],
+      ["randomText", randomText ? "" : undefined],
+    ])
+  ).toString();
+
+  const colorPattern = "(([a-fA-F0-9]{3})|([a-fA-F0-9]{6}))|rand";
+  const fontOptions: Option[] = [
+    { label: "", value: "" },
+    { label: "Overpass", value: "overpass", selected: true },
+    { label: "Fira Mono", value: "fira-mono" },
+    { label: "Fira Sans", value: "fira-sans" },
+    { label: "Roboto", value: "roboto" },
+  ];
+  const fmtOptions: Option[] = [
+    { label: "png", value: "png", selected: true },
+    { label: "jpg", value: "jpg" },
+    { label: "jpeg", value: "jpeg" },
+    { label: "gif", value: "gif" },
+    { label: "webp", value: "webp" },
+  ];
+  const colorProps = { type: "text", pattern: colorPattern, spellcheck: false };
 </script>
 
 <style>
   .ImageForm {
     @apply w-full px-2;
   }
+
   .form-group {
-    @apply pb-4;
-    @apply px-10;
+    @apply pb-4 px-10;
     @apply w-full;
-    @apply flex;
-    @apply flex-row;
-    @apply justify-between;
-    @apply content-start;
+    @apply flex flex-row justify-between content-start;
+    @apply items-baseline;
   }
   .form-group > * {
     flex: 0 0 50%;
+    @apply block;
   }
-  input,
-  select {
-    @apply block w-full;
-    @apply shadow;
+  .input-group {
+    @apply items-center;
+  }
+  input {
+    @apply w-full;
+    @apply shadow-sm;
     @apply border-2 border-gray-200 rounded;
     @apply py-1 px-2;
-    @apply appearance-none;
     @apply text-gray-700;
     @apply leading-tight;
   }
-  input:focus,
-  select:focus {
+  input:not([type="checkbox"]) {
+    @apply appearance-none;
+  }
+  /* input[type="checkbox"] {
+    @apply w-auto;
+    @apply p-0;
+    @apply mr-0 ml-3;
+  } */
+  input:focus {
     @apply outline-none bg-white border-indigo-500;
   }
   input:invalid {
     @apply border-red-500;
+  }
+  .d-none {
+    display: none !important;
   }
 </style>
 
@@ -52,7 +109,9 @@
 </Row>
 
 <Row>
-  <code>/api/{width}x{height}/{bg}/{fg}/{fmt}/</code>
+  <code class="overflow-hidden">
+    /api/{width}x{height}/{bg}/{fg}/{fmt}/{params.length ? '?' : ''}{params}
+  </code>
 </Row>
 
 <form class="ImageForm">
@@ -78,62 +137,59 @@
   </div>
   <div class="form-group">
     <label for="fg">Foreground Color</label>
-    <input
-      type="text"
-      id="fg"
-      name="fg"
-      bind:value={fg}
-      pattern={colorPattern}
-      spellcheck={false} />
+    <input id="fg" name="fg" bind:value={fg} {...colorProps} />
   </div>
   <div class="form-group">
     <label for="bg">Background Color</label>
-    <input
-      type="text"
-      id="bg"
-      name="bg"
-      bind:value={bg}
-      pattern={colorPattern}
-      spellcheck={false} />
+    <input id="bg" name="bg" bind:value={bg} {...colorProps} />
   </div>
+
   <div class="form-group">
     <label for="fmt">Format</label>
-    <div class="input-group relative">
-      <select name="fmt" id="fmt" bind:value={fmt}>
-        <option selected value="png">PNG</option>
-      </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center
-        px-2 text-gray-700">
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20">
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586
-            4.343 8z" />
-        </svg>
-      </div>
+    <div class="input-group">
+      <CustomSelect id="fmt" options={fmtOptions} bind:value={fmt} />
+      <HelpText>
+        <q>jpg</q>
+        and
+        <q>jpeg</q>
+        are equivalent.
+      </HelpText>
     </div>
   </div>
+
   <div class="form-group">
     <label for="font">Font</label>
-    <div class="input-group relative">
-      <select name="font" id="font">
-        <option selected value="overpass">Overpass</option>
-      </select>
-      <div
-        class="pointer-events-none absolute inset-y-0 right-0 flex items-center
-        px-2 text-gray-700">
-        <svg
-          class="fill-current h-4 w-4"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20">
-          <path
-            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586
-            4.343 8z" />
-        </svg>
-      </div>
+    <div class="input-group">
+      <CustomSelect id="font" options={fontOptions} bind:value={font} />
+      <HelpText>The font of the text.</HelpText>
     </div>
   </div>
+
+  <div id="text-row" class="form-group">
+    <label for="text">Text</label>
+    <input
+      class="pr-0 mr-0 flex-grow"
+      type="text"
+      id="text"
+      name="text"
+      bind:this={textInput}
+      bind:value={text}
+      spellcheck={false} />
+
+  </div>
+  <div class="form-group d-none" id="random-text-row">
+    <label for="randomText">Random Text</label>
+    <div>
+      <input
+        class="ml-0 mr-auto"
+        name="randomText"
+        id="randomText"
+        type="checkbox"
+        bind:checked={randomText}
+        on:change={randomChanged} />
+      <HelpText>&nbsp;</HelpText>
+    </div>
+
+  </div>
+
 </form>
