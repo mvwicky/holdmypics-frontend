@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import { onDestroy, onMount } from 'svelte';
 
-  import Row from "./components/Row.svelte";
   import ImageForm from "./components/ImageForm.svelte";
   import Routes from "./components/Routes.svelte";
-
+  import Row from "./components/Row.svelte";
   import { fetchCount } from "./helpers/fetch-count";
   import { title, count } from "./helpers/stores";
+  import type { ImageFormProps } from "./typing/index";
+
+  export let imageFormProps: ImageFormProps;
 
   onMount(() => {
     fetchCount().then((c) => {
@@ -56,10 +58,14 @@
       <h2>
         {#if imgCountStr.length === 0}
           &hellip;
-        {:else}~{imgCountStr} Images Generated{/if}
+        {:else}
+          ~
+          <span data-cy="img-count">{imgCountStr}</span>
+          Images Generated
+        {/if}
       </h2>
     </Row>
-    <ImageForm />
+    <ImageForm {...imageFormProps} />
     <Routes />
   </div>
 </div>

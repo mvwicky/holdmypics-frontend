@@ -5,5 +5,18 @@
     "build": true
   },
   "css.validate": false,
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "eslint.codeActionsOnSave.mode": "all",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "[svelte]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": false
+    }
+  },
+  "prettier.disableLanguages": ["svelte"],
+  "eslint.trace.server": "messages",
+  "eslint.debug": true,
+  "svelte.plugin.svelte.format.enable": false
 }

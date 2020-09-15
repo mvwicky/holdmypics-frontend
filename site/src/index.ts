@@ -1,6 +1,15 @@
 import App from "./App.svelte";
+import type { ImageFormProps } from "./typing/index";
 
-const app = new App({ target: document.body });
+const imageFormProps: ImageFormProps = {
+  width: 638,
+  height: 388,
+  fg: "555",
+  bg: "cef",
+  fmt: "png",
+};
+
+const app = new App({ target: document.body, props: { imageFormProps } });
 
 export default App;
 

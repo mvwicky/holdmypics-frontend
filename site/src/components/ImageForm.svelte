@@ -1,27 +1,29 @@
 <script lang="ts">
-  import type { Option } from "../typing";
+  import type { Option, UpdateEvent } from "../typing";
   import { onlyTruthy } from "../helpers";
 
   import Row from "./Row.svelte";
   import HelpText from "./HelpText.svelte";
   import CustomSelect from "./CustomSelect.svelte";
+  import ColorInput from "./ColorInput.svelte";
 
-  let width: number = 638;
-  let height: number = 388;
-  let fg: string = "555";
-  let bg: string = "cef";
-  let fmt: string = "png";
+  export let width: number;
+  export let height: number;
+  export let fg: string;
+  export let bg: string;
+  export let fmt: string;
+
   let font: string = "overpass";
   let text: string = "";
   let randomText: boolean = false;
 
+  let form: HTMLFormElement;
   let textInput: HTMLInputElement | undefined;
 
-  function randomChanged() {
-    if (textInput) {
-      textInput.disabled = randomText;
-    }
-  }
+  const updateFg = ({ detail }: UpdateEvent) => (fg = detail.value);
+  const updateBg = ({ detail }: UpdateEvent) => (bg = detail.value);
+
+  const randomChanged = () => textInput && (textInput.disabled = randomText);
 
   let textParam: string | undefined;
   $: textParam = textInput?.disabled
@@ -38,8 +40,16 @@
       ["randomText", randomText ? "" : undefined],
     ])
   ).toString();
+  let url: string;
+  $: url = [
+    "/api",
+    `${width}x${height}`,
+    bg,
+    fg,
+    fmt,
+    `${params.length ? "?" : ""}${params}`,
+  ].join("/");
 
-  const colorPattern = "(([a-fA-F0-9]{3})|([a-fA-F0-9]{6}))|rand";
   const fontOptions: Option[] = [
     { label: "", value: "" },
     { label: "Overpass", value: "overpass", selected: true },
@@ -54,7 +64,6 @@
     { label: "gif", value: "gif" },
     { label: "webp", value: "webp" },
   ];
-  const colorProps = { type: "text", pattern: colorPattern, spellcheck: false };
 </script>
 
 <style>
@@ -109,12 +118,10 @@
 </Row>
 
 <Row>
-  <code class="overflow-hidden">
-    /api/{width}x{height}/{bg}/{fg}/{fmt}/{params.length ? '?' : ''}{params}
-  </code>
+  <code class="overflow-hidden">{url}</code>
 </Row>
 
-<form class="ImageForm">
+<form bind:this={form} class="ImageForm">
   <div class="form-group">
     <label for="width">Width</label>
     <input
@@ -136,12 +143,18 @@
       bind:value={height} />
   </div>
   <div class="form-group">
-    <label for="fg">Foreground Color</label>
-    <input id="fg" name="fg" bind:value={fg} {...colorProps} />
+    <ColorInput
+      label="Foreground Color"
+      id="fg"
+      value={fg}
+      on:update={updateFg} />
   </div>
   <div class="form-group">
-    <label for="bg">Background Color</label>
-    <input id="bg" name="bg" bind:value={bg} {...colorProps} />
+    <ColorInput
+      label="Background Color"
+      id="bg"
+      value={bg}
+      on:update={updateBg} />
   </div>
 
   <div class="form-group">

@@ -1,13 +1,14 @@
+const path = require("path");
+
 const prod = process.env.NODE_ENV === "production";
 
-const postCSSImport = require("postcss-import");
-const tailwindCSS = require("tailwindcss");
+const atImport = require("postcss-import");
+const tailwind = require("tailwindcss");
 
-const plugins = [postCSSImport({ path: ["src/styles"] }), tailwindCSS];
+const importConfig = { path: [path.join(__dirname, "src", "styles")] };
+const plugins = [atImport(importConfig), tailwind];
 if (prod) {
-  // const presetEnv = require("postcss-preset-env");
   const cssNano = require("cssnano");
-  // plugins.push(presetEnv({ stage: 3 }), cssNano({ preset: "default" }));
   plugins.push(cssNano({ preset: "default" }));
 }
 
