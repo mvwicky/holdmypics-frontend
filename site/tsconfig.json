@@ -26,5 +26,6 @@
     "paths": { "*": ["web_modules/.types/*"] }
   },
   "include": ["src", "types"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "extends": "@tsconfig/svelte/tsconfig.json"
 }
