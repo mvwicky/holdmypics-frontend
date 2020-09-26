@@ -4,7 +4,10 @@
     "e2e",
     "site"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "yarn workspace holdmypics-site run build",
+    "dev": "yarn workspace holdmypics-site run dev"
+  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.7.0",

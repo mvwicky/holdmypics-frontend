@@ -10,8 +10,8 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.svelte\"",
     "lint": "prettier --check \"src/**/*.ts\" \"src/**/*.svelte\"",
     "start": "snowpack dev",
-    "test": "echo \"This template does not include a test runner by default.\" && exit 1",
-    "start:test": ""
+    "start:test": "",
+    "test": "echo \"This template does not include a test runner by default.\" && exit 1"
   },
   "dependencies": {
     "svelte": "^3.24.1",
