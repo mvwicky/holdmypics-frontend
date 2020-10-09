@@ -39,8 +39,8 @@
   }
   .AppInner {
     @apply border-l border-r border-gray-500;
-    @apply max-w-2xl h-full;
-    @apply mx-auto py-6;
+    @apply max-w-3xl h-full;
+    @apply mx-auto py-6 px-5;
   }
 </style>
 
@@ -48,16 +48,16 @@
 
 <div class="App">
   <div class="AppInner">
-    <Row>
+    <Row classes="justify-center">
       <h1>{$title}</h1>
     </Row>
-    <Row>
+    <Row classes="justify-center">
       <p>
         Ever needed to create some placeholder images? Here's an easy was to do
         that.
       </p>
     </Row>
-    <Row>
+    <Row classes="justify-center">
       <h2>
         {#if imgCountStr.length === 0}
           &hellip;

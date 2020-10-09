@@ -17,6 +17,5 @@
   },
   "prettier.disableLanguages": ["svelte"],
   "eslint.trace.server": "messages",
-  "eslint.debug": true,
-  "svelte.plugin.svelte.format.enable": false
+  "eslint.debug": true
 }

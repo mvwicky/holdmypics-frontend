@@ -12,6 +12,13 @@
       "problemMatcher": [],
       "label": "npm: build - site",
       "detail": "snowpack build"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "yarn workspace holdmypics-site run dev"
     }
   ]
 }

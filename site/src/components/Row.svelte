@@ -1,20 +1,17 @@
 <script lang="ts">
-  export let content: string = "";
+  export let classes: string = "";
+
+  let actualClasses = ["Row", classes].join(" ");
 </script>
 
 <style>
   .Row {
     width: 100%;
     display: flex;
-    justify-content: center;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin-bottom: 1rem;
+    @apply mb-4;
   }
 </style>
 
-<div class="Row">
-  <slot>
-    {@html content}
-  </slot>
+<div class={actualClasses}>
+  <slot />
 </div>
