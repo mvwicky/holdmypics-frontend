@@ -1,5 +1,5 @@
 {
-  "name": "holdmytests-e2e",
+  "name": "holdmytests",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
@@ -8,6 +8,7 @@
   "scripts": {
     "open": "cypress open",
     "run": "cypress run",
+    "start": "sirv ../site/build -p 8081",
     "start-server": "sirv ../site/build -p 8081",
     "test": "cypress run"
   },

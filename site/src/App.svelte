@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onDestroy, onMount } from "svelte";
 
   import ImageForm from "./components/ImageForm.svelte";
   import Routes from "./components/Routes.svelte";
   import Row from "./components/Row.svelte";
+  import Styles from "./helpers/Styles.svelte";
   import { fetchCount } from "./helpers/fetch-count";
   import { title, count } from "./helpers/stores";
   import type { ImageFormProps } from "./typing/index";
@@ -43,6 +44,8 @@
   }
 </style>
 
+<Styles />
+
 <div class="App">
   <div class="AppInner">
     <Row>
@@ -65,7 +68,7 @@
         {/if}
       </h2>
     </Row>
-    <ImageForm {...imageFormProps} />
+    <ImageForm props={imageFormProps} />
     <Routes />
   </div>
 </div>

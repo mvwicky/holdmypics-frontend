@@ -17,5 +17,4 @@
   <slot>
     {@html content}
   </slot>
-
 </div>

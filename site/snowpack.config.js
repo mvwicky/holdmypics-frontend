@@ -1,26 +1,30 @@
-const prod = process.env.NODE_ENV === "production";
-const USE_TSC = Boolean(process.env.USE_TSC);
-
-const TSC_PLUGIN = [
-  "@snowpack/plugin-run-script",
-  { cmd: "tsc --noEmit", watch: "$1 --watch" },
+const plugins = [
+  [
+    "@snowpack/plugin-build-script",
+    { cmd: "postcss", input: [".css"], output: [".css"] },
+  ],
+  ["@snowpack/plugin-svelte", {}],
+  "@snowpack/plugin-typescript",
+  [
+    "@snowpack/plugin-run-script",
+    {
+      cmd: "svelte-check --output human",
+      watch: "$1 --watch",
+    },
+  ],
+  ["@snowpack/plugin-webpack", { htmlMinifierOptions: false }],
 ];
 
 module.exports = {
-  extends: "@snowpack/app-scripts-svelte",
   mount: {
     public: "/",
     src: "/_dist_",
   },
-  plugins: [
-    ["@snowpack/plugin-postcss", {}],
-    USE_TSC ? TSC_PLUGIN : undefined,
-    ["@snowpack/plugin-run-script", { cmd: "svelte-check" }],
-    // "@snowpack/plugin-webpack",
-  ].filter((elem) => elem !== undefined),
+  plugins,
   buildOptions: { clean: true },
   devOptions: { open: "none", secure: false, port: 9091 },
   installOptions: {
     installTypes: true,
+    env: { NODE_ENV: true },
   },
 };

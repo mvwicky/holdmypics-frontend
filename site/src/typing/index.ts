@@ -13,4 +13,5 @@ export interface ImageFormProps {
   fg: string;
   bg: string;
   fmt: string;
+  text: string;
 }

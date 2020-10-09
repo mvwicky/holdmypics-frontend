@@ -1,12 +1,12 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ["site/**/*.md", "site/**/*.njk", "site/**/*.html"],
+  purge: ["public/**/*.html", "src/**/*.svelte"],
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Fira Sans"', ...fontFamily.sans],
-        body: ['"Spectral"', ...fontFamily.serif],
+        body: ['"Fira Sans"', ...fontFamily.sans],
+        display: ['"Spectral"', ...fontFamily.serif],
       },
     },
     fontFamily: {

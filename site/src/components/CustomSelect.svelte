@@ -12,7 +12,7 @@
     @apply block w-full;
     @apply shadow-sm;
     @apply border-2 border-gray-200 rounded;
-    @apply py-1 px-2;
+    @apply py-1 pr-2 pl-1;
     @apply appearance-none;
     @apply text-gray-700;
     @apply leading-tight;

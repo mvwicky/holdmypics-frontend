@@ -9,32 +9,31 @@
     "dev": "snowpack dev",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.svelte\"",
     "lint": "prettier --check \"src/**/*.ts\" \"src/**/*.svelte\"",
-    "start": "snowpack dev",
-    "start:test": "",
-    "test": "echo \"This template does not include a test runner by default.\" && exit 1"
+    "start": "snowpack dev"
   },
-  "dependencies": {
-    "svelte": "^3.24.1",
-    "tailwindcss": "^1.6.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
-    "@snowpack/app-scripts-svelte": "^1.8.3",
+    "@snowpack/plugin-build-script": "^2.0.7",
     "@snowpack/plugin-postcss": "^1.0.1",
     "@snowpack/plugin-run-script": "^2.0.3",
+    "@snowpack/plugin-svelte": "^2.1.2",
+    "@snowpack/plugin-typescript": "^1.0.1",
     "@snowpack/plugin-webpack": "^2.0.2",
     "@tsconfig/svelte": "^1.0.8",
     "cssnano": "^4.1.10",
     "lit-html": "^1.2.1",
-    "postcss": "^7.0.32",
-    "postcss-cli": "^7.1.1",
-    "postcss-import": "^12.0.1",
-    "postcss-load-config": "^2.1.0",
+    "postcss": "^8",
+    "postcss-cli": "^8",
+    "postcss-load-config": "^3",
     "prettier-plugin-svelte": "^1.1.0",
+    "rollup": "^2.29.0",
     "snowpack": "^2.7.6",
+    "svelte": "^3.24.1",
     "svelte-check": "^1.0.13",
     "svelte-preprocess": "^4.0.11",
+    "tailwindcss": "^1.6.2",
     "tippy.js": "^6.2.6",
     "typescript": "^4"
   }

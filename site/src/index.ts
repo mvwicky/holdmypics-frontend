@@ -7,6 +7,7 @@ const imageFormProps: ImageFormProps = {
   fg: "555",
   bg: "cef",
   fmt: "png",
+  text: "Something Funny",
 };
 
 const app = new App({ target: document.body, props: { imageFormProps } });
