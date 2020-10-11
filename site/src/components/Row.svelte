@@ -1,7 +1,5 @@
 <script lang="ts">
-  export let classes: string = "";
-
-  let actualClasses = ["Row", classes].join(" ");
+  export let center: boolean = false;
 </script>
 
 <style>
@@ -12,6 +10,6 @@
   }
 </style>
 
-<div class={actualClasses}>
+<div class="Row" class:justify-center={center}>
   <slot />
 </div>

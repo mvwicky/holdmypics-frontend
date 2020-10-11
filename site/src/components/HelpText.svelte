@@ -6,7 +6,5 @@
 </style>
 
 <small class="HelpText">
-  <slot>
-    <!--  -->
-  </slot>
+  <slot />
 </small>

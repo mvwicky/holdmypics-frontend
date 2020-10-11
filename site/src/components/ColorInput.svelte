@@ -36,12 +36,6 @@
     @apply text-gray-700;
     @apply leading-tight;
   }
-  input:not([type="checkbox"]) {
-    @apply appearance-none;
-  }
-  input:invalid {
-    @apply border-red-500;
-  }
 </style>
 
 <label for={id}>{label}</label>

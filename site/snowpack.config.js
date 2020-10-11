@@ -10,6 +10,7 @@ const plugins = [
     {
       cmd: "svelte-check --output human",
       watch: "$1 --watch",
+      output: "stream",
     },
   ],
   ["@snowpack/plugin-webpack", { htmlMinifierOptions: false }],

@@ -4,16 +4,17 @@
   export let text: string = "Copy to Clipboard";
   export let data: string = "";
 
+  let justCopied: boolean = false;
+  const duration = 1250;
+
   function initClipboard(node: HTMLElement) {
     const clipboard = new ClipboardJS(node);
-    console.log(node);
+    node.style.animationDuration = `${duration}ms`;
     clipboard.on("success", (e) => {
-      console.log(e);
-      const origText = text;
+      justCopied = true;
       window.setTimeout(() => {
-        text = origText;
-      }, 1000);
-      text = "Copied";
+        justCopied = false;
+      }, duration);
     });
     clipboard.on("error", (e) => {
       console.log(e);
@@ -27,6 +28,18 @@
 </script>
 
 <style>
+  @keyframes copied-pulse {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+    /* 50% {
+      transform: scale3d(1.05, 1.05, 1.05);
+    } */
+    to {
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  }
+
   .CopyButton {
     @apply py-2 px-4;
     @apply text-sm leading-5 font-medium text-white;
@@ -38,9 +51,17 @@
   .CopyButton:focus {
     @apply outline-none border-blue-900;
   }
+  .CopyButton.copied {
+    animation: copied-pulse 1s ease-in-out 1;
+  }
 </style>
 
 <button
   class="CopyButton"
   data-clipboard-text={data}
-  use:initClipboard>{text}</button>
+  use:initClipboard
+  title="Click to copy the current URL"
+  class:copied={justCopied}
+  disabled={justCopied}>
+  {#if justCopied}Copied{:else}{text}{/if}
+</button>
