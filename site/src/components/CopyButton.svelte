@@ -10,7 +10,7 @@
   function initClipboard(node: HTMLElement) {
     const clipboard = new ClipboardJS(node);
     node.style.animationDuration = `${duration}ms`;
-    clipboard.on("success", (e) => {
+    clipboard.on("success", () => {
       justCopied = true;
       window.setTimeout(() => {
         justCopied = false;
@@ -28,22 +28,31 @@
 </script>
 
 <style>
-  @keyframes copied-pulse {
+  @keyframes copied {
     from {
+      background-position: bottom left;
       transform: scale3d(1, 1, 1);
     }
     /* 50% {
       transform: scale3d(1.05, 1.05, 1.05);
     } */
     to {
+      background-position: bottom right;
       transform: scale3d(1.05, 1.05, 1.05);
     }
   }
 
   .CopyButton {
+    --gradient-from-color: rgba(44, 82, 130, 0.9);
+    --gradient-to-color: rgba(0, 100, 255, 0.3);
+    --gradient-color-stops: var(--gradient-from-color) 50%,
+      var(--gradient-to-color) 50%;
     @apply py-2 px-4;
     @apply text-sm leading-5 font-medium text-white;
-    @apply border border-transparent rounded-md bg-blue-800;
+    @apply border border-transparent rounded-md;
+    @apply bg-clip-padding bg-gradient-to-r bg-no-repeat bg-left-bottom;
+
+    background-size: 200% 100%;
   }
   .CopyButton:hover {
     @apply bg-blue-600;
@@ -52,7 +61,8 @@
     @apply outline-none border-blue-900;
   }
   .CopyButton.copied {
-    animation: copied-pulse 1s ease-in-out 1;
+    @apply px-8;
+    animation: copied 1s ease-in-out 1 normal backwards;
   }
 </style>
 

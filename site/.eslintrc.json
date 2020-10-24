@@ -1,5 +1,5 @@
 {
-  "env": { "browser": true },
+  "env": { "browser": true, "es6": true },
   "overrides": [
     {
       "files": ["*.config.js"],

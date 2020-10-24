@@ -3,8 +3,9 @@
 
   import ImageForm from "./components/ImageForm.svelte";
   import Routes from "./components/Routes.svelte";
-  import Row from "./components/Row.svelte";
+  import Row from "./helpers/Row.svelte";
   import Styles from "./helpers/Styles.svelte";
+  import Loading from "./components/Loading.svelte";
   import { fetchCount } from "./helpers/fetch-count";
   import { title, count } from "./helpers/stores";
   import type { ImageFormProps } from "./typing/index";
@@ -30,7 +31,10 @@
       imgCountStr = "";
     }
   });
-  onDestroy(unsubscribe);
+  onDestroy(() => {
+    console.log("Unsubscribing");
+    unsubscribe();
+  });
 </script>
 
 <style>
@@ -86,7 +90,7 @@
       <Row center={true}>
         <h2>
           {#if imgCountStr.length === 0}
-            &hellip;
+            <Loading />
           {:else}
             ~
             <span data-cy="img-count">{imgCountStr}</span>

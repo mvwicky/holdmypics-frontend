@@ -10,7 +10,7 @@
 
   let input: HTMLInputElement;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<{ update: { value: string } }>();
 
   onMount(() => {
     name = name ?? id;

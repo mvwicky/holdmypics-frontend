@@ -1,9 +1,6 @@
 const plugins = [
-  [
-    "@snowpack/plugin-build-script",
-    { cmd: "postcss", input: [".css"], output: [".css"] },
-  ],
-  ["@snowpack/plugin-svelte", {}],
+  "@snowpack/plugin-postcss",
+  "@snowpack/plugin-svelte",
   "@snowpack/plugin-typescript",
   [
     "@snowpack/plugin-run-script",

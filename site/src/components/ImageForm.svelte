@@ -2,7 +2,7 @@
   import type { ImageFormProps, Option, UpdateEvent } from "../typing";
   import { onlyTruthy } from "../helpers";
 
-  import Row from "./Row.svelte";
+  import Row from "../helpers/Row.svelte";
   import HelpText from "./HelpText.svelte";
   import CustomSelect from "./CustomSelect.svelte";
   import ColorInput from "./ColorInput.svelte";
@@ -53,14 +53,7 @@
     value: font.toLowerCase().replace(/\s/, "-"),
     selected: font === "Overpass",
   }));
-  // const fontOptions: Option[] = [
-  //   { label: "", value: "" },
-  //   { label: "Overpass", value: "overpass", selected: true },
-  //   { label: "Fira Mono", value: "fira-mono" },
-  //   { label: "Fira Sans", value: "fira-sans" },
-  //   { label: "Roboto", value: "roboto" },
-  // ];
-  const fmtOptions: Option[] = ALL_FORMATS.map((fmt, idx) => ({
+  const fmtOptions: Option[] = ALL_FORMATS.map((fmt) => ({
     label: fmt,
     value: fmt,
     selected: fmt === "png",

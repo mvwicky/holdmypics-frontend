@@ -1,7 +1,10 @@
 const { fontFamily } = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: ["public/**/*.html", "src/**/*.svelte"],
+  purge: {
+    content: ["public/**/*.html", "src/**/*.svelte"],
+    // options: { whitelist: ["justify-center"] },
+  },
   theme: {
     extend: {
       fontFamily: {

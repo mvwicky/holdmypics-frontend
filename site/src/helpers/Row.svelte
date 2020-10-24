@@ -8,8 +8,11 @@
     display: flex;
     @apply mb-4;
   }
+  .Row.center {
+    @apply justify-center;
+  }
 </style>
 
-<div class="Row" class:justify-center={center}>
+<div class="Row" class:center>
   <slot />
 </div>

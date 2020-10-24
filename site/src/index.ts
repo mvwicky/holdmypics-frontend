@@ -1,4 +1,5 @@
 import App from "./App.svelte";
+// import { count } from "./helpers/stores";
 import type { ImageFormProps } from "./typing/index";
 
 const imageFormProps: ImageFormProps = {
@@ -21,6 +22,7 @@ if (import.meta.env.MODE === "development") {
     import.meta.hot.accept();
     import.meta.hot.dispose(() => {
       app.$destroy();
+      // count.set(undefined);
     });
   }
 }
