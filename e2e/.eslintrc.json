@@ -1,5 +1,4 @@
 {
-  "env": {
-    "mocha": true
-  }
+  "plugins": ["cypress"],
+  "extends": "plugin:cypress/recommended"
 }

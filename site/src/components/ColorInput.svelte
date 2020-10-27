@@ -43,6 +43,7 @@
   {id}
   {name}
   {value}
+  data-cy={id}
   bind:this={input}
   on:input={updateValue}
   {...COLOR_PROPS} />

@@ -6,7 +6,14 @@
   ],
   "scripts": {
     "build": "yarn workspace holdmypics run build",
-    "dev": "yarn workspace holdmypics run dev"
+    "build:watch": "yarn build --watch",
+    "dev": "yarn workspace holdmypics run dev",
+    "open": "npm-run-all test:build -p build:watch test:server test:open",
+    "test": "npm-run-all test:build -p test:server test:run",
+    "test:build": "make build",
+    "test:open": "yarn workspace holdmytests cypress open",
+    "test:run": "yarn workspace holdmytests test",
+    "test:server": "yarn workspace holdmytests start"
   },
   "dependencies": {},
   "devDependencies": {
@@ -16,6 +23,7 @@
     "prettier": "^2.0.5",
     "stylelint": "^13.6.1",
     "stylelint-config-mvwicky": "^0.0.5",
-    "trash-cli": "^3.1.0"
+    "trash-cli": "^3.1.0",
+    "typescript": "^4"
   }
 }

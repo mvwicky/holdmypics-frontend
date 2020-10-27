@@ -92,8 +92,7 @@
           {#if imgCountStr.length === 0}
             <Loading />
           {:else}
-            ~
-            <span data-cy="img-count">{imgCountStr}</span>
+            ~<span data-cy="img-count">{imgCountStr}</span>
             Images Generated
           {/if}
         </h2>
