@@ -38,10 +38,14 @@
       ["random_text", randomText ? "" : undefined],
     ])
   ).toString();
+
+  // let size: string;
+  // $: size = `${props.width}x${props.height}`;
   let url: string;
   $: url = [
     "/api",
     `${props.width}x${props.height}`,
+    //size,
     props.bg,
     props.fg,
     props.fmt,
@@ -51,7 +55,7 @@
   const fontOptions: Option[] = [""].concat(ALL_FONTS).map((font) => ({
     label: font,
     value: font.toLowerCase().replace(/\s/, "-"),
-    selected: font === "Overpass",
+    selected: /overpass/i.test(font),
   }));
   const fmtOptions: Option[] = ALL_FORMATS.map((fmt) => ({
     label: fmt,
