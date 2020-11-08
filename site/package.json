@@ -1,6 +1,6 @@
 {
   "name": "holdmypics",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "build": "snowpack build",
@@ -15,7 +15,6 @@
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
-    "@snowpack/plugin-build-script": "^2.0.7",
     "@snowpack/plugin-postcss": "^1.0.1",
     "@snowpack/plugin-run-script": "^2.0.3",
     "@snowpack/plugin-svelte": "^3.0",
@@ -25,8 +24,6 @@
     "@types/clipboard": "^2.0.1",
     "clipboard": "^2.0.6",
     "cssnano": "^4.1.10",
-    "escape-goat": "^3.0.0",
-    "lit-html": "^1.2.1",
     "postcss": "^8",
     "postcss-cli": "^8",
     "postcss-load-config": "^3",

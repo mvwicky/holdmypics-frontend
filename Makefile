@@ -6,17 +6,21 @@ MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
 FIND=gfind
-FIND_ARGS=-type f -not -path '*/build/*' -not -path '*/node_modules/*' -not -path '*/web_modules/*' -not -name '.*'
+EXCLUDE_PATHS=build node_modules web_modules
+NOT_PATHS=$(foreach path,$(EXCLUDE_PATHS),-not -path '*/$(path)/*')
+FIND_ARGS=-type f $(NOT_PATHS) -not -name '.*'
 INPUT_FILES=$(shell $(FIND) site $(FIND_ARGS))
 
 CACHE_DIR=.cache
 BUILT_FILE=$(CACHE_DIR)/built-site
 
+.PHONY: build
+
 build: $(BUILT_FILE)
 
-$(BUILT_FILE): $(CACHE_DIR)
+$(BUILT_FILE): $(CACHE_DIR) $(INPUT_FILES)
 	yarn build
-	touch $(BUILT_FILE)
+	touch $@
 
 $(CACHE_DIR):
 	mkdir $(CACHE_DIR)

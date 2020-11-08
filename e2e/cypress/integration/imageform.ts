@@ -10,6 +10,7 @@ describe("Goes to index", () => {
 
   it("Fetches count from remote.", () => {
     cy.visit("/");
+    cy.screenshot("pre-count");
     cy.wait("@getCount", { timeout: 1000 })
       .its("response.body")
       .should("include", "count");
@@ -17,6 +18,10 @@ describe("Goes to index", () => {
     const countStr = COUNT.toLocaleString(undefined, {
       style: "decimal",
       maximumFractionDigits: 0,
+    });
+    cy.get("[data-cy=img-count]").should(($imgCount) => {
+      const text = $imgCount.text();
+      expect(text.replace(/\D/, "")).to.equal(String(COUNT));
     });
     cy.get("[data-cy=img-count]").should("contain.text", countStr);
   });

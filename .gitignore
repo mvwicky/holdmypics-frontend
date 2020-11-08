@@ -1,7 +1,10 @@
-.build
-build
-web_modules
-node_modules
-_output/
-!site/
+*.pem
+.build/
 .envrc
+_output/
+build/
+node_modules/
+web_modules/
+
+# Negations
+!site/

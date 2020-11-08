@@ -85,19 +85,19 @@
   }
 
   h1 {
-    @apply text-5xl;
+    @apply text-5xl font-semibold;
   }
 
   h2 {
-    @apply text-4xl;
+    @apply text-4xl font-semibold;
   }
 
   h3 {
-    @apply text-3xl;
+    @apply text-3xl font-semibold;
   }
 
   h4 {
-    @apply text-2xl;
+    @apply text-2xl font-semibold;
   }
 
   h5 {

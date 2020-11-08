@@ -10,7 +10,7 @@ const plugins = [
       output: "stream",
     },
   ],
-  ["@snowpack/plugin-webpack", { htmlMinifierOptions: false }],
+  ["@snowpack/plugin-webpack", {}],
 ];
 
 module.exports = {
@@ -25,4 +25,5 @@ module.exports = {
     installTypes: true,
     env: { NODE_ENV: true },
   },
+  proxy: {},
 };

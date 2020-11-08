@@ -8,14 +8,25 @@
   "scripts": {
     "open": "cypress open",
     "run": "cypress run",
-    "start": "sirv ../site/build -p 8081 --quiet --dev",
+    "start": "sirv ../site/build -p 8081 --quiet --dev --key ../cert-key.pem --cert ../cert.pem --http2",
     "start-server": "start",
-    "test": "cypress run"
+    "test": "cypress run",
+    "run:tests": "ts-node ./run-tests.ts"
   },
   "dependencies": {
+    "@types/debug": "^4.1.5",
+    "@types/fs-extra": "^9.0.2",
+    "@types/yargs": "^15.0.9",
+    "chalk": "^4.1.0",
     "cypress": "^5",
+    "debug": "^4.2.0",
+    "execa": "^4.0.3",
+    "fs-extra": "^9.0.1",
+    "node-fetch": "3.0.0-beta.9",
     "sirv-cli": "^1.0.6",
-    "start-server-and-test": "^1.11.3"
+    "start-server-and-test": "^1.11.3",
+    "ts-node": "^9.0.0",
+    "yargs": "^16.1.0"
   },
   "devDependencies": {
     "eslint-plugin-cypress": "^2.11.2"

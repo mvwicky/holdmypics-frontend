@@ -13,7 +13,8 @@
     "test:build": "make build",
     "test:open": "yarn workspace holdmytests cypress open",
     "test:run": "yarn workspace holdmytests test",
-    "test:server": "yarn workspace holdmytests start"
+    "test:server": "yarn workspace holdmytests start",
+    "rt": "yarn --silent workspace holdmytests run --slient run:tests"
   },
   "dependencies": {},
   "devDependencies": {
